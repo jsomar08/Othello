@@ -12,6 +12,12 @@ public class OthelloGame extends JFrame {
     Player whitePlayer;
     Player currentPlayer;
 
+    public static void main(String[] args){
+        JButton button = new JButton("Player vs Player");
+
+        JButton anotherButton = new JButton("Player vs Computer");
+    }
+
 
         public OthelloGame() {
         super("Othello");
