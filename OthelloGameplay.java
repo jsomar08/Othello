@@ -7,8 +7,7 @@ class OthelloGame {
 
     public OthelloGame() {
         board = new char[8][8];
-        currentPlayer = 'B';
-        initializeBoard();
+        currentPlayer = '⚫';
     }
     
 
@@ -26,26 +25,25 @@ class OthelloGame {
 
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
-        while (hasValidMove('B') || hasValidMove('W')) {
+        while (hasValidMove('⚫') || hasValidMove('⚪')) {
             showBoard();
 
             if (!hasValidMove(currentPlayer)) {
                 System.out.println("No valid moves for " + currentPlayer + ". Turn skipped");
                 switchPlayer();
-                continue;
             }
 
             System.out.println("Current Player: " + currentPlayer);
-            System.out.print("Enter row (0-7): ");
+            System.out.println("Enter row (1-8): ");
             int row = scanner.nextInt();
-            System.out.print("Enter column (0-7): ");
+            System.out.println("Enter column (1-8): ");
             int col = scanner.nextInt();
 
             if (isValidMove(row, col)) {
                 makeMove(row, col);
                 switchPlayer();
             } else {
-                System.out.println("Invalid move. Try again.");
+                System.out.println("Invalid move please try again");
             }
         }
 
