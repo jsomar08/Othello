@@ -25,6 +25,14 @@ public class Board {
         }
         System.out.println();
 
+        for (int r = 0; r < 8; r++) {
+            System.out.print((char)('A' + r) + " ");
+            for (int c = 0; c < 8; c++) {
+                System.out.print(board[r][c].getColor() + " ");
+            }
+            System.out.println();
+        }
+
        
     }
 
@@ -37,11 +45,11 @@ public class Board {
 
     }
 
-    public int countDisks(char color) {
+    public int countDisks(String color) {
         int count = 0;
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
-                if (board[r][c].getColour() == color) {
+                if (board[r][c].getColor() == color) {
                     count++;
                 }
             }
@@ -52,7 +60,11 @@ public class Board {
 
 
     public static void main(String[] args) {
-       
+        
+            Board b = new Board();
+            b.printBoard();
+        
+        
     }
 
 }    
