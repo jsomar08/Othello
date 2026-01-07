@@ -1,32 +1,83 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.util.Scanner;
 
+class OthelloGame {
 
-public class OthelloGame extends JFrame {
+    private char[][] board;
+    private char currentPlayer;
 
-    JPanel main;
-    JLabel statusLabel;
-    Board board;
-    Player blackPlayer;
-    Player whitePlayer;
-    Player currentPlayer;
+    public OthelloGame() {
+        board = new char[8][8];
+        currentPlayer = 'B';
+        initializeBoard();
+    }
+    
 
-    public static void main(String[] args){
-        JButton button = new JButton("Player vs Player");
-
-        JButton anotherButton = new JButton("Player vs Computer");
+    public void initializeBoard() {
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                board[r][c] = '.';
+            }
+        }
+        board[3][3] = '⚪';
+        board[3][4] = '⚫';
+        board[4][3] = '⚫';
+        board[4][4] = '⚪';
     }
 
+    public void startGame() {
+        Scanner scanner = new Scanner(System.in);
+        while (hasValidMove('B') || hasValidMove('W')) {
+            showBoard();
 
-        public OthelloGame() {
-        super("Othello");
-        setUpGame();
-        setUpPanels();
-        setUpBoardButtons();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setVisible(true);
+            if (!hasValidMove(currentPlayer)) {
+                System.out.println("No valid moves for " + currentPlayer + ". Turn skipped");
+                switchPlayer();
+                continue;
+            }
+
+            System.out.println("Current Player: " + currentPlayer);
+            System.out.print("Enter row (0-7): ");
+            int row = scanner.nextInt();
+            System.out.print("Enter column (0-7): ");
+            int col = scanner.nextInt();
+
+            if (isValidMove(row, col)) {
+                makeMove(row, col);
+                switchPlayer();
+            } else {
+                System.out.println("Invalid move. Try again.");
+            }
+        }
+
+        endGame();
+    }
+
+    public boolean isValidMove(int row, int col) {
+        
+
+    }
+
+    public void makeMove(int row, int col) {
+
+    }
+
+    public boolean hasValidMove(char player) {
+    
+    }
+
+    public void switchPlayer() {
+        
+    }
+
+    public void showBoard() {
+        
+    }
+
+    public void endGame() {
+        
+    }
+
+    public static void main(String[] args) {
+        
     }
 }
-
