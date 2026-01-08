@@ -2,6 +2,11 @@
 class Disk {
     private String color;
 
+    @Override
+    public String toString() {
+        return String.format( "( %s )", color);
+    }
+
     public String getColor() {
         return color;
     }
@@ -14,15 +19,20 @@ class Disk {
         this.color = color;
     }
 
-    public static String flipingPlayer(String color){
-        if(color.equals( "•")){
-            color = "○";
+    public Disk flipingPlayer(){
+        if(this.color.equals( "•")){
+            this.color = "○";
         }
-        else if(color.equals( "○")){
-            color = "•";
+        else if(this.color.equals( "○")){
+            this.color = "•";
         }
-        return color;
+        return new Disk(color);
     }
+
+    public static void main(String[] args) {
+        System.out.println(new Disk("○"));
+    }
+    
 
 
 
