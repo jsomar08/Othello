@@ -28,7 +28,7 @@ public class Board {
         System.out.println();
 
         for (int r = 0; r < 8; r++) {
-            System.out.print((char) ('A' + r) + " ");
+            System.out.print((char)('A' + r) + " ");
             for (int c = 0; c < 8; c++) {
                 System.out.print(board[r][c].getColor() + " ");
             }
@@ -54,6 +54,12 @@ public class Board {
             }
         }
         return count;
+    }
+
+    public int[] convertRowToLetter(String i) { // try to interpret A5 as row 1 column 5
+
+
+        
     }
 
     public static void main(String[] args) {
