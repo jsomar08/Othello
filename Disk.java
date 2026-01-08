@@ -19,6 +19,10 @@ class Disk {
         this.color = color;
     }
 
+    public boolean isEmpty() {
+        return color.equals(".");
+    }
+
     public Disk flipingPlayer(){
         if(this.color.equals( "•")){
             this.color = "○";
