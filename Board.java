@@ -56,14 +56,20 @@ public class Board {
         return count;
     }
 
-    public void rowNumberToLetter(int row, int col){// try to interpret A5 as row 1 column 5
-        char[] letters = {'A','B','C','D','E','F','G','H'};
-        System.out.println(letters[row - 1] + col);
+    public int [] rowNumberToLetter(int row, int col){// try to interpret A5 as row 1 column 5
+        String[] letters = {"A","B","C","D","E","F","G","H"};
+        
+        for (int i = 0; i<letters.length;i++){
+            String.valueOf(row).replace("1", letters[i]);
+            
+            i++;
+             
+        }
+        return new int [] {row, col};
+        
+        
     
     }
 
-    public static void main(String[] args) {// testing board
-        Board b = new Board();
-        b.printBoard();
-    }
+    
 }
