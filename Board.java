@@ -74,6 +74,17 @@ public class Board {
     
     }
 
+    public Disk getDisk(int row, int col) {// gets the disk
+        if (!isInsideBoard(row, col)){
+            return null;
+        }
+        return board[row][col];
+    }
+
+    public void placeDisk(int row, int col, String color) {//makes disk over position
+        board[row][col] = new Disk(color);
+    }
+
     public static void main(String[] args) {
         Board b = new Board();
         b.printBoard();
