@@ -1,53 +1,69 @@
-import java.util.Scanner;
+public class Board {
 
-class Player {
-    private String name;
-    private String color;
-    private boolean isBot;
+    private Disk[][] board;
 
-    public Player(String name, String color) {
-        this.name = name;
-        this.color = color;
+    public Board() {
+        board = new Disk[8][8];
+        initializeBoard();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public boolean isBot() {
-        return isBot;
-    }
-
-    public int[] getMove(Board board) {
-    
-        Scanner scanner = new Scanner(System.in);
-
-    String[] rowLabels = {"A","B","C","D","E","F","G","H"};
-
-    while (true) {
-        System.out.print(name + " (" + color + ") enter move: ");
-        String input = scanner.nextLine().toUpperCase();
-
-        if (input.length() < 2 || input.length() > 2) {
-            System.out.println("Invalid input. "); // does allow A5 but not ABC123
+    public void initializeBoard() {//creates the board
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                board[r][c] = new Disk(".");
+            }
         }
 
-        String rowLetter = input.substring(0, 1); // Gets A
-        int col = Integer.parseInt(input.substring(1)) - 1; // Gets 5 
-
+        board[3][3] = new Disk("•");
+        board[3][4] = new Disk("○");
+        board[4][3] = new Disk("○");
+        board[4][4] = new Disk("•");
     }
 
-    // Convert the row letter (A–H) into a row index (0–7)
-    // use loop
+    public void printBoard() {//prints board layout
+        System.out.print("  ");
+        for (int c = 1; c <= 8; c++) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
 
+        for (int r = 0; r < 8; r++) {
+            System.out.print((char)('A' + r) + " ");
+            for (int c = 0; c < 8; c++) {
+                System.out.print(board[r][c].getColor() + " ");
+            }
+            System.out.println();
+        }
+    }
 
-    // if row and column are in the board
-    // return array with the coordinate
+    public boolean isInsideBoard(int row, int col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
 
+    public boolean isEmptyPosition(int row, int col) {  //if the board is empty 
+        return isInsideBoard(row, col) && board[row][col].isEmpty();
+    }
+    
+    public int countDisks(String color) {// counts the amount of disks
+        int count = 0;
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (board[r][c].getColor().equals(color)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
-}
+    public void rowNumberToLetter(int row, int col){// try to interpret A5 as row 1 column 5
+        char[] letters = {'A','B','C','D','E','F','G','H'};
+        System.out.println(letters[row - 1] + col);
+    
+    }
+
+    public static void main(String[] args) {// testing board
+        Board b = new Board();
+        b.printBoard();
+    }
 }
