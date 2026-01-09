@@ -7,7 +7,7 @@ public class Board {
         initializeBoard();
     }
 
-    public void initializeBoard() {
+    public void initializeBoard() {//creates the board
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 board[r][c] = new Disk(".");
@@ -20,34 +20,31 @@ public class Board {
         board[4][4] = new Disk("•");
     }
 
-    public void printBoard() {
+    public void printBoard() {//prints board layout
         System.out.print("  ");
         for (int c = 1; c <= 8; c++) {
             System.out.print(c + " ");
         }
         System.out.println();
 
-        String[] rowLabels = {"A","B","C","D","E","F","G","H"};
-
         for (int r = 0; r < 8; r++) {
-        System.out.print(rowLabels[r] + " ");
-        for (int c = 0; c < 8; c++) {
-        System.out.print(board[r][c].getColor() + " ");
+            System.out.print((char)('A' + r) + " ");
+            for (int c = 0; c < 8; c++) {
+                System.out.print(board[r][c].getColor() + " ");
+            }
+            System.out.println();
         }
-        System.out.println();
-}
-
     }
 
     public boolean isInsideBoard(int row, int col) {
         return row >= 0 && row < 8 && col >= 0 && col < 8;
     }
 
-    public boolean isEmptyPosition(int row, int col) {
+    public boolean isEmptyPosition(int row, int col) {//if the board coord is empty 
         return isInsideBoard(row, col) && board[row][col].isEmpty();
     }
-
-    public int countDisks(String color) {
+    
+    public int countDisks(String color) {// counts the amount of disks
         int count = 0;
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
@@ -61,14 +58,10 @@ public class Board {
 
     public int [] rowNumberToLetter(int row, int col){// try to interpret A5 as row 1 column 5
         String[] letters = {"A","B","C","D","E","F","G","H"};
-        
-        for (int i = 0; i<letters.length;i++){
-            String.valueOf(row).replace("1", letters[i]);
+        String.valueOf(row).replace(String.valueOf(row), letters[row]);
             
-            i++;
-             
-        }
         return new int [] {row, col};
+        
         
         
     
@@ -85,8 +78,8 @@ public class Board {
         board[row][col] = new Disk(color);
     }
 
-    public static void main(String[] args) {
-        Board b = new Board();
-        b.printBoard();
-    }
+
+
+
+    
 }
