@@ -32,7 +32,7 @@ class Player {
         System.out.print(name + " (" + color + ") enter move: ");
         String input = scanner.nextLine().toUpperCase();
 
-        if (input.length() < 2) {
+        if (input.length() < 2 || input.length() > 2) {
             System.out.println("Invalid input. "); // does allow A5 but not ABC123
         }
 
