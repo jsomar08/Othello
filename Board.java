@@ -20,21 +20,19 @@ public class Board {
         board[4][4] = new Disk("•");
     }
 
-    public void printBoard() {//prints board layout
-        System.out.print("  ");
-        for (int c = 1; c <= 8; c++) {
-            System.out.print(c + " ");
+    public void printBoard() { // Jan 10 2025 by omar
+    System.out.println("  1 2 3 4 5 6 7 8");
+    String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    
+    for (int r = 0; r < 8; r++) {
+        System.out.print(letters[r] + " ");
+        for (int c = 0; c < 8; c++) {
+            System.out.print(board[r][c].getColor() + " ");
         }
         System.out.println();
-
-        for (int r = 0; r < 8; r++) {
-            System.out.print((char)('A' + r) + " ");
-            for (int c = 0; c < 8; c++) {
-                System.out.print(board[r][c].getColor() + " ");
-            }
-            System.out.println();
-        }
     }
+}
+
 
     public boolean isInsideBoard(int row, int col) {
         return row >= 0 && row < 8 && col >= 0 && col < 8;
@@ -78,6 +76,29 @@ public class Board {
         board[row][col] = new Disk(color);
     }
 
+public void flipDisksInDirection(int row, int col, int dRow, int dCol, String color) { // jan 10
+    int r = row + dRow;
+    int c = col + dCol;
+    
+    while (isInsideBoard(r, c)) {
+        if (board[r][c].isEmpty()) {
+            System.out.println("disk not found to flip");
+        }
+        if (board[r][c].getColor().equals(color)) {
+         
+            int flipR = row + dRow;
+            int flipC = col + dCol;
+            while (flipR != r || flipC != c) {
+                board[flipR][flipC].setColor(color);
+                flipR += dRow;
+                flipC += dCol;
+            }
+            
+        }
+        r += dRow;
+        c += dCol;
+    }
+}
 
 
 
