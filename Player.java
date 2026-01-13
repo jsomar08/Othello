@@ -1,69 +1,78 @@
-public class Board {
+import java.util.Scanner;
 
-    private Disk[][] board;
+class Player {
+    private String name;
+    private String color;
+    private boolean isBot;
+    static Scanner scanner = new Scanner(System.in);
 
-    public Board() {
-        board = new Disk[8][8];
-        initializeBoard();
+    public Player(String name, String color) {
+        this.name = name;
+        this.color = color;
     }
 
-    public void initializeBoard() {//creates the board
-        for (int r = 0; r < 8; r++) {
-            for (int c = 0; c < 8; c++) {
-                board[r][c] = new Disk(".");
-            }
+    public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public boolean isBot() {
+        return isBot;
+    }
+
+    public int[] getMove(Board board) {
+    String[] rowLabels = {"A","B","C","D","E","F","G","H"};
+
+    while (true) { // keep asking until legal move
+        System.out.print(name + " (" + color + ") enter move: ");
+        String input = scanner.nextLine().toUpperCase();
+
+        // 
+        if (input.length() != 2) {
+            System.out.println("Invalid input. Use format like A5.");
+           
         }
 
-        board[3][3] = new Disk("•");
-        board[3][4] = new Disk("○");
-        board[4][3] = new Disk("○");
-        board[4][4] = new Disk("•");
-    }
-
-    public void printBoard() {//prints board layout
-        System.out.print("  ");
-        for (int c = 1; c <= 8; c++) {
-            System.out.print(c + " ");
+        String rowLetter = input.substring(0, 1);// gets the value of the row (A)
+        int col = 0;
+        try {
+            col = Integer.parseInt(input.substring(1)) - 1; // gets the value of the column and subtracts it by 1 because array starts 0
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid column number. Use 1-8.");
+            
         }
-        System.out.println();
 
-        for (int r = 0; r < 8; r++) {
-            System.out.print((char)('A' + r) + " ");
-            for (int c = 0; c < 8; c++) {
-                System.out.print(board[r][c].getColor() + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public boolean isInsideBoard(int row, int col) {
-        return row >= 0 && row < 8 && col >= 0 && col < 8;
-    }
-
-    public boolean isEmptyPosition(int row, int col) {  //if the board is empty 
-        return isInsideBoard(row, col) && board[row][col].isEmpty();
-    }
     
-    public int countDisks(String color) {// counts the amount of disks
-        int count = 0;
-        for (int r = 0; r < 8; r++) {
-            for (int c = 0; c < 8; c++) {
-                if (board[r][c].getColor().equals(color)) {
-                    count++;
-                }
+        int row = -1;
+        for (int i = 0; i < rowLabels.length; i++) {
+            if (rowLabels[i].equals(rowLetter)) {
+                row = i;
+
             }
         }
-        return count;
-    }
 
-    public void rowNumberToLetter(int row, int col){// try to interpret A5 as row 1 column 5
-        char[] letters = {'A','B','C','D','E','F','G','H'};
-        System.out.println(letters[row - 1] + col);
-    
-    }
+        if (row < 0 || row > 8) { 
+            System.out.println("Invalid row letter. Use A-H.");
+  
+        }
 
-    public static void main(String[] args) {// testing board
-        Board b = new Board();
-        b.printBoard();
+        
+        if (!board.isInsideBoard(row, col)) {
+            System.out.println("Move is outside the board. Try again.");
+ 
+        }
+
+        if (!board.isEmptyPosition(row, col)) {
+            System.out.println("Position already inplace");
+      
+        }
+
+        return new int[] {row, col};
     }
 }
+
+}
+
