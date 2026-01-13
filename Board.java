@@ -77,28 +77,16 @@ public class Board {
     }
 
 public void flipDisksInDirection(int row, int col, int dRow, int dCol, String color) { // jan 10
-    int r = row + dRow;
+    int r = row + dRow; //starts checking next position
     int c = col + dCol;
     
     while (isInsideBoard(r, c)) {
         if (board[r][c].isEmpty()) {
             System.out.println("disk not found to flip");
         }
-        if (board[r][c].getColor().equals(color)) {
+        if (board[r][c].getColor().equals(color)) { // disks between the start and here should be flipped
          
-            int flipR = row + dRow;
-            int flipC = col + dCol;
-            while (flipR != r || flipC != c) {
-                board[flipR][flipC].setColor(color);
-                flipR += dRow;
-                flipC += dCol;
-            }
-            
-        }
-        r += dRow;
-        c += dCol;
-    }
-}
+       
 
 
 
