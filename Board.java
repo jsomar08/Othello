@@ -20,7 +20,7 @@ public class Board {
         board[4][4] = new Disk("•");
     }
 
-    public void printBoard() { // Jan 10 2025 by omar
+    public void printBoard() {
     System.out.println("  1 2 3 4 5 6 7 8");
     String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
     
@@ -65,30 +65,189 @@ public class Board {
     
     }
 
-    public Disk getDisk(int row, int col) {// gets the disk
+    public Disk getDisk(int row, int col) {  // gets the disk
         if (!isInsideBoard(row, col)){
             return null;
         }
         return board[row][col];
     }
 
-    public void placeDisk(int row, int col, String color) {//makes disk over position
+    public void placeDisk(int row, int col, String color) {  //makes disk over position
         board[row][col] = new Disk(color);
     }
 
-public void flipDisksInDirection(int row, int col, int dRow, int dCol, String color) { // jan 10
-    int r = row + dRow; //starts checking next position
-    int c = col + dCol;
+    public void turnUp(int row, int col) {
+        String color = board[row][col].getColor();
     
-    while (isInsideBoard(r, c)) {
-        if (board[r][c].isEmpty()) {
-            System.out.println("disk not found to flip");
+        for (int i = 1; i <= 8; i++) {
+            int r = row - i;
+    
+            if (board[r][col].isEmpty()) {
+                break; 
+            }
+
+            if (board[r][col].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][col].setColor(color);
         }
-        if (board[r][c].getColor().equals(color)) { // disks between the start and here should be flipped
-         
-       
+    }
+    
+    
+
+    public void turnDown(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int r = row + i;
+    
+            if (board[r][col].isEmpty()) {
+                break; 
+            }
+
+            if (board[r][col].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][col].setColor(color);
+        }
+    }
+
+    public void turnLeft(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int c = col - i;
+    
+            if (board[row][c].isEmpty()) {
+                break; 
+            }
+
+            if (board[row][c].getColor().equals(color)) {
+                break;
+            }
+    
+            board[row][c].setColor(color);
+        }
+    }
+
+    public void turnRight(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int c = col + i;
+    
+            if (board[row][c].isEmpty()) {
+                break; 
+            }
+
+            if (board[row][c].getColor().equals(color)) {
+                break;
+            }
+    
+            board[row][c].setColor(color);
+        }
+    }
+
+    public void uRight(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int c = col + i;
+            int r = row - i;
+    
+            if (board[r][c].isEmpty()) {
+                break; 
+            }
+
+            if (board[r][c].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][c].setColor(color);
+        }
+    }
+
+    public void uLeft(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int c = col - i;
+            int r = row - i;
+    
+            if (board[r][c].isEmpty()) {
+                break; 
+            }
+
+            if (board[r][c].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][c].setColor(color);
+        }
+    }
+
+    public void dRight(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int c = col + i;
+            int r = row + i;
+    
+            if (board[r][c].isEmpty()) {
+                break; 
+            }
+
+            if (board[r][c].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][c].setColor(color);
+        }
+    }
+
+    public void dLeft(int row, int col) {
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int c = col - i;
+            int r = row + i;
+    
+            if (board[r][c].isEmpty()) {
+                break; 
+            }
+
+            if (board[r][c].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][c].setColor(color);
+        }
+    }
+
+    public void allDirections(int row, int col) {
+        turnUp(row, col);
+        turnDown(row, col);
+        turnLeft(row, col);
+        turnRight(row, col);
+        dLeft(row, col);
+        dRight(row, col);
+        uLeft(row, col);
+        uRight(row, col);
+    }
+
+    
+
 
 
 
     
+
+    public static void main(String[] args) {
+        Board b = new Board();
+        b.printBoard();
+    }
 }
+
+
