@@ -1,3 +1,4 @@
+
 public class Board {
 
     private Disk[][] board;
@@ -20,19 +21,21 @@ public class Board {
         board[4][4] = new Disk("•");
     }
 
-    public void printBoard() {
-    System.out.println("  1 2 3 4 5 6 7 8");
-    String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    
-    for (int r = 0; r < 8; r++) {
-        System.out.print(letters[r] + " ");
-        for (int c = 0; c < 8; c++) {
-            System.out.print(board[r][c].getColor() + " ");
+    public void printBoard() {//prints board layout
+        System.out.print("  ");
+        for (int c = 1; c <= 8; c++) {
+            System.out.print(c + " ");
         }
         System.out.println();
-    }
-}
 
+        for (int r = 0; r < 8; r++) {
+            System.out.print((char)('A' + r) + " ");
+            for (int c = 0; c < 8; c++) {
+                System.out.print(board[r][c].getColor() + " ");
+            }
+            System.out.println();
+        }
+    }
 
     public boolean isInsideBoard(int row, int col) {
         return row >= 0 && row < 8 && col >= 0 && col < 8;
@@ -42,8 +45,11 @@ public class Board {
         if(empty.getColor().equals(".") && isInsideBoard(row, col)){
             return true;
         }
-        else{}
-        return false;
+        else{
+            return false;
+        }
+        
+        
     }
     
     public int countDisks(String color) {// counts the amount of disks
@@ -58,18 +64,19 @@ public class Board {
         return count;
     }
 
-    public int [] rowNumberToLetter(int row, int col){// try to interpret A5 as row 1 column 5
-        String[] letters = {"A","B","C","D","E","F","G","H"};
-        String.valueOf(row).replace(String.valueOf(row), letters[row]);
+    public int [] rowNumberToLetter(String coord){// try to interpret A5 as row 1 column 5
+        int []
+        for(int i = 0; i<letters.length;i++)
+        
             
-        return new int [] {row, col};
+        return new int [] {coord};
         
         
         
     
     }
 
-    public boolean canFlipUp(int row, int col, Disk current){
+    public boolean canFlipUp(int row, int col){
         int count = 0;
         Disk d = getAtDiskLocation(row, col);
         
@@ -89,16 +96,149 @@ public class Board {
         }
         return false;
     }
-
-
-
-    public Disk getAtDiskLocation(int row, int col) {// gets the disk location
-    
-        return board[row][col];
+    public boolean canFlipDown(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i<=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row+i, col);
+            if(isInsideBoard(row+i, col)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
+        
+    }
+    public boolean canFlipRight(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i>=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row, col-i);
+            if(isInsideBoard(row, col-i)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
+        
+    }
+    public boolean canFlipUpRight(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i>=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row-i, col-i);
+            if(isInsideBoard(row-i, col-i)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
+        
+    }
+    public boolean canFlipUpLeft(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i<=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row-i, col+i);
+            if(isInsideBoard(row-i, col+i)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
-    public void placeDisk(int row, int col, String color) {//makes disk over position
-        board[row][col] = new Disk(color);
+    public boolean canFlipLeft(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i<=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row, col+i);
+            if(isInsideBoard(row, col+i)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean canFlipDownLeft(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i<=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row+i, col+i);
+            if(isInsideBoard(row+i, col+i)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean canFlipDownRight(int row, int col) {
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i>=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row+i, col-i);
+            if(isInsideBoard(row+i, col-i)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
+        }
+        return false;
         
     }
 
@@ -263,17 +403,21 @@ public class Board {
         uRight(row, col);
     }
 
+
+
+
+    public Disk getAtDiskLocation(int row, int col) {// gets the disk location
     
-
-
-
-
-    
-
-    public static void main(String[] args) {
-        Board b = new Board();
-        b.printBoard();
+        return board[row][col];
     }
+
+    public void placeDisk(int row, int col, String color) {//makes disk over position
+        board[row][col] = new Disk(color);
+        
+    }
+
+
+
+
+    
 }
-
-
