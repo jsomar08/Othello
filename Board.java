@@ -38,8 +38,12 @@ public class Board {
         return row >= 0 && row < 8 && col >= 0 && col < 8;
     }
 
-    public boolean isEmptyPosition(int row, int col) {//if the board coord is empty 
-        return isInsideBoard(row, col) && board[row][col].isEmpty();
+    public boolean isEmptyPosition(int row, int col, Disk empty) {//if the board coord is empty 
+        if(empty.getColor().equals(".") && isInsideBoard(row, col)){
+            return true;
+        }
+        else{}
+        return false;
     }
     
     public int countDisks(String color) {// counts the amount of disks
