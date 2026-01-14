@@ -83,10 +83,10 @@ public class Board {
         for (int i = 0; i<=1 && i<8;i++){
             Disk c = getAtDiskLocation(row -i, col);
             if(isInsideBoard(row - i, col)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -103,10 +103,10 @@ public class Board {
         for (int i = 0; i<=1 && i<8;i++){
             Disk c = getAtDiskLocation(row+i, col);
             if(isInsideBoard(row+i, col)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -124,10 +124,10 @@ public class Board {
         for (int i = 0; i>=1 && i<8;i++){
             Disk c = getAtDiskLocation(row, col-i);
             if(isInsideBoard(row, col-i)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -145,10 +145,10 @@ public class Board {
         for (int i = 0; i>=1 && i<8;i++){
             Disk c = getAtDiskLocation(row-i, col-i);
             if(isInsideBoard(row-i, col-i)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -166,10 +166,10 @@ public class Board {
         for (int i = 0; i<=1 && i<8;i++){
             Disk c = getAtDiskLocation(row-i, col+i);
             if(isInsideBoard(row-i, col+i)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -187,10 +187,10 @@ public class Board {
         for (int i = 0; i<=1 && i<8;i++){
             Disk c = getAtDiskLocation(row, col+i);
             if(isInsideBoard(row, col+i)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -207,10 +207,10 @@ public class Board {
         for (int i = 0; i<=1 && i<8;i++){
             Disk c = getAtDiskLocation(row+i, col+i);
             if(isInsideBoard(row+i, col+i)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -227,10 +227,10 @@ public class Board {
         for (int i = 0; i>=1 && i<8;i++){
             Disk c = getAtDiskLocation(row+i, col-i);
             if(isInsideBoard(row+i, col-i)){
-                if(d.getColor() == c.oppositeDisk().getColor()){
-                count ++;
+                if(d.getColor().equals(c.oppositeDisk().getColor())){
+                    count ++;
                 }
-                else if(d.getColor() == c.getColor() && count >=1){
+                else if(d.getColor().equals(c.getColor()) && count >=1){
                     return true;
                 }
                 else if (isEmptyPosition(row, col, c)){
@@ -243,27 +243,22 @@ public class Board {
     }
 
     public void turnUp(int row, int col) {
-    if (!canFlipUp(row, col, board[row][col])) {
-        return; // if can't return false
-    }
-    else {
-    String color = board[row][col].getColor();
-    int r = row - 1;
+        String color = board[row][col].getColor();
+    
+        for (int i = 1; i <= 8; i++) {
+            int r = row - i;
+    
+            if (board[r][col].isEmpty()) {
+                break; 
+            }
 
-    while (isInsideBoard(r, col)) {
-        if (board[r][col].isEmpty()) {
-            break;      
+            if (board[r][col].getColor().equals(color)) {
+                break;
+            }
+    
+            board[r][col].setColor(color);
         }
-        if (board[r][col].getColor().equals(color)) {
-            break; 
-        }
-        board[r][col].setColor(color);            
-        r--; 
-
-
     }
-}
-}
     
     
 
@@ -426,3 +421,4 @@ public class Board {
 
     
 }
+
