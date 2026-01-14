@@ -243,22 +243,27 @@ public class Board {
     }
 
     public void turnUp(int row, int col) {
-        String color = board[row][col].getColor();
-    
-        for (int i = 1; i <= 8; i++) {
-            int r = row - i;
-    
-            if (board[r][col].isEmpty()) {
-                break; 
-            }
-
-            if (board[r][col].getColor().equals(color)) {
-                break;
-            }
-    
-            board[r][col].setColor(color);
-        }
+    if (!canFlipUp(row, col, board[row][col])) {
+        return; // if can't return false
     }
+    else {
+    String color = board[row][col].getColor();
+    int r = row - 1;
+
+    while (isInsideBoard(r, col)) {
+        if (board[r][col].isEmpty()) {
+            break;      
+        }
+        if (board[r][col].getColor().equals(color)) {
+            break; 
+        }
+        board[r][col].setColor(color);            
+        r--; 
+
+
+    }
+}
+}
     
     
 
