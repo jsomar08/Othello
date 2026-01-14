@@ -65,15 +65,37 @@ public class Board {
     
     }
 
-    public Disk getDisk(int row, int col) {  // gets the disk
-        if (!isInsideBoard(row, col)){
-            return null;
+    public boolean canFlipUp(int row, int col, Disk current){
+        int count = 0;
+        Disk d = getAtDiskLocation(row, col);
+        
+        for (int i = 0; i<=1 && i<8;i++){
+            Disk c = getAtDiskLocation(row -i, col);
+            if(isInsideBoard(row - i, col)){
+                if(d.getColor() == c.oppositeDisk().getColor()){
+                count ++;
+                }
+                else if(d.getColor() == c.getColor() && count >=1){
+                    return true;
+                }
+                else if (isEmptyPosition(row, col, c)){
+                    return false;
+                }
+            }
         }
+        return false;
+    }
+
+
+
+    public Disk getAtDiskLocation(int row, int col) {// gets the disk location
+    
         return board[row][col];
     }
 
-    public void placeDisk(int row, int col, String color) {  //makes disk over position
+    public void placeDisk(int row, int col, String color) {//makes disk over position
         board[row][col] = new Disk(color);
+        
     }
 
     public void turnUp(int row, int col) {
