@@ -14,20 +14,21 @@ class MoveLogger {
     private void initializeFile() {
         try {
             FileWriter writer = new FileWriter(filename);
-            writer.write("MoveNumber,Player,Color,Row,Column,Position\n");
+            writer.write("Position\n");
             writer.close();
         } catch (IOException e) {
             System.out.println("Error creating log file: " + e.getMessage());
         }
     }
 
-    public void logMove(int moveNumber, String playerName, String color, int row, int col) {
+    public void logMove(int row, int col) {
         String[] rowLabels = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        String position = rowLabels[row] + (col + 1); // converts 3 2 into D3
+        String position = rowLabels[row] + (col + 1);//opposite of letterToRow
+        
         
         try {
             FileWriter writer = new FileWriter(filename); 
-            writer.write(moveNumber + "," + playerName + "," + color + "," + row + "," + col + "," + position + "\n");
+            writer.write(position);
             writer.close();
         } catch (IOException e) {
             System.out.println("Error logging move: " + e.getMessage());
@@ -52,9 +53,9 @@ class MoveLogger {
     public static void main(String[] args) {
         MoveLogger logger = new MoveLogger("game_moves.csv");
         
-        logger.logMove(1, "Alice", "•", 3, 2);
-        logger.logMove(2, "Bob", "○", 2, 2);
-        logger.logMove(3, "Alice", "•", 4, 2);
+        logger.logMove( 3, 2);
+        logger.logMove( 2, 2);
+        logger.logMove( 4, 2);
         
         System.out.println("Moves logged to game_moves.csv\n");
         
