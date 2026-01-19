@@ -65,7 +65,7 @@ public class Board {
     public int[] letterToRowNumber(String coord) {
         coord = coord.trim().toUpperCase();
         String letters = "ABCDEFGH";
-        int row = letters.indexOf(coord.charAt(0));  // F -> 5
+        int row = letters.indexOf(coord.charAt(0));  
         String numberPart = coord.substring(1);
         int col = Integer.parseInt(numberPart) - 1;
     
@@ -419,81 +419,5 @@ public class Board {
         return canFlipUp(row, col) ||canFlipDown(row, col) ||canFlipLeft(row, col) ||canFlipRight(row, col) ||canFlipUpRight(row, col) ||canFlipUpLeft(row, col) ||canFlipDownRight(row, col) ||canFlipDownLeft(row, col);
 
     }
-
-    public void testGame(String movesFileName, String outputFileName) {
-        Board gameBoard = new Board(); 
-        String currentPlayer = "•";    
-    
-        
-        try {
-            File file = new File(movesFileName);
-            java.util.Scanner reader = new java.util.Scanner(file);
-        
-            while (reader.hasNextLine()) {
-            String move = reader.nextLine().trim();
-                if (move.length() == 0) {
-                    continue;
-                }
-                int[] position = gameBoard.letterToRowNumber(move);
-                int row = position[0];
-                int col = position[1];
-            
-                // Only play valid moves
-                if (gameBoard.isValidMove(row, col, currentPlayer)) {
-                    gameBoard.placeDisk(row, col, currentPlayer);
-                    gameBoard.allDirections(row, col);
-                    if (currentPlayer.equals("•")) {
-                        currentPlayer = "○";
-                    } else {
-                        currentPlayer = "•";
-                    }
-                } else {
-                    System.out.println("Skipped invalid move: " + move);
-                }
-            }
-            reader.close();
-        
-        } catch (java.io.FileNotFoundException e) {
-            System.out.println("File not found: " + movesFileName);
-            return;
-        }
-        try {
-            FileWriter writer = new FileWriter(outputFileName);
-        
-        
-            writer.write("  ");
-            for (int c = 1; c <= 8; c++) {
-                writer.write(c + " ");
-            }
-            writer.write("\n");
-        
-        
-            for (int r = 0; r < 8; r++) {
-                writer.write((char)('A' + r) + " ");
-                for (int c = 0; c < 8; c++) {
-                    writer.write(gameBoard.getAtDiskLocation(r, c).getColor() + " ");
-                }
-                writer.write("\n");
-            }
-        
-            writer.close();
-            System.out.println("Game saved to " + outputFileName);
-        } catch (java.io.IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
-        }
-    }
-
-
-
-    
 }
- class Play {
 
-    public static void main(String[] args) {
-        Board b = new Board();
-        
-        b.testGame("game1.txt", "game1_result.txt");
-        b.testGame("game2.txt", "game2_result.txt"); 
-        b.testGame("fullgame.txt", "fullgame_result.txt");
-    }
-}
