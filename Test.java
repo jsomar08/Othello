@@ -22,6 +22,9 @@ class BoardTest {
 }
 
 class CanFlipTest {
+    /**
+     * tests to see if the disks can be flipped in different scenarios
+     */
     static void testCanFlip() {
         Board testBoard = new Board();
         testBoard.initializeBoard();
@@ -87,6 +90,9 @@ class DiskTest {
 }
 
 class PlayerTest {
+    /**
+     * 
+     */
     static void testGetters() {
         Player p1 = new Player("Alice", "•", false);
         Player p2 = new Player("Bot", "○", true);
@@ -100,6 +106,9 @@ class PlayerTest {
         System.out.println("P2 is bot: " + p2.isBot());
     }
     
+    /**
+     * 
+     */
     static void testBotMove() {
         Board board = new Board();
         Player bot = new Player("Bot", "○", true);
@@ -113,6 +122,9 @@ class PlayerTest {
         }
     }
 
+    /**
+     * 
+     */
     static void testHumanIsBot() {
         Player human = new Player("Human", "•", false);
         System.out.println("Human is not bot: " + !human.isBot());
