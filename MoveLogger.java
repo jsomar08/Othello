@@ -13,7 +13,7 @@ class MoveLogger {
 
     private void initializeFile() {
         try {
-            FileWriter writer = new FileWriter(filename);
+            FileWriter writer = new FileWriter(filename, true); // prevents moves from refreshing
             writer.write("Position\n");
             writer.close();
         } catch (IOException e) {
@@ -22,18 +22,17 @@ class MoveLogger {
     }
 
     public void logMove(int row, int col) {
-        String[] rowLabels = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        String position = rowLabels[row] + (col + 1);//opposite of letterToRow
-        
-        
-        try {
-            FileWriter writer = new FileWriter(filename); 
-            writer.write(position);
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Error logging move: " + e.getMessage());
-        }
+    String[] rowLabels = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    String position = rowLabels[row] + (col + 1);
+    
+    try {
+        FileWriter writer = new FileWriter(filename, true); // ← Add true for append mode
+        writer.write(position + "\n"); // ← Add \n for new line
+        writer.close();
+    } catch (IOException e) {
+        System.out.println("Error logging move: " + e.getMessage());
     }
+}
 
     static void readMoves(String filename) {
         try {
@@ -60,6 +59,7 @@ class MoveLogger {
         System.out.println("Moves logged to game_moves.csv\n");
         
         System.out.println("Reading moves:");
+        
         readMoves("game_moves.csv");
     }
 }
