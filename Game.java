@@ -72,6 +72,9 @@ class Game {
         currentPlayer = player1;
     }
 
+    /**
+     *  Controls the full Othello game flow from start until the game ends.
+     */
     public void play() {
         System.out.println("\n=== GAME START ===");
         System.out.println("Black (•) vs White (○)");
@@ -129,6 +132,10 @@ class Game {
         endGame();
     }
 
+    /** Checks if the given player has at least one valid move
+    * @param player the player being checked for possible moves
+    * @return true if the player has a valid move false otherwise
+    */
     private boolean hasValidMoves(Player player) {
         // Loop through entire board to find at least one valid move
         for (int r = 0; r < 8; r++) {
@@ -144,6 +151,9 @@ class Game {
         return false;
     }
 
+    /** Checks to see if the board is full
+     * @return true if it is false if not
+     */
     private boolean isBoardFull() {
         // Check if any empty positions remain
         for (int r = 0; r < 8; r++) {
@@ -156,11 +166,21 @@ class Game {
         return true;
     }
 
+    /** 
+     * switches turns for the player after every completed move
+     */
     private void switchPlayer() {
-        // Alternate between player1 and player2
-        currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    if (currentPlayer == player1) {
+        currentPlayer = player2;
+    } else {
+        currentPlayer = player1;
     }
+}
 
+
+    /**
+     * Displays the final board, scores both players, announces the winner, and ends the game.
+     */
     private void endGame() {
         board.printBoard();
         
