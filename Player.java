@@ -14,18 +14,31 @@ class Player {
         this.isBot = isBot;
     }
 
+    /** gets the name of the human
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /** gets the colour of the player
+     * @return the colour
+     */
     public String getColor() {
         return color;
     }
 
+    /** checks to see if a bot will be playing or not
+     * @return true or false
+     */
     public boolean isBot() {
         return isBot;
     }
 
+    /** gets the move from either the human or the bot
+     * @param board 
+     * @return human or bot moves
+     */
     public int[] getMove(Board board) {
         if (isBot) {
             return getBotMove(board);
@@ -34,6 +47,10 @@ class Player {
         }
     }
 
+    /** Gets any valid move the human inputs
+     * @param board the current board
+     * @return an int array {row, col} representing the human player's move
+     */
     private int[] getHumanMove(Board board) {
         String[] rowLabels = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
@@ -84,6 +101,10 @@ class Player {
         }
     }
 
+    /** Finds a valid move for the bot by checking all empty board positions and selecting one at random
+     * @param board  the current game board used to determine valid moves
+     * @return an int array {row, col} representing the bot’s move, or null if no valid moves exist
+     */
     private int[] getBotMove(Board board) {
 
         
