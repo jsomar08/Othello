@@ -128,14 +128,13 @@ class PlayerTest {
 class GameTest {
     static void testGameCreation() {
         System.out.println("Creating game - follow prompts to test");
-      // This will prompt for user input
-        // Game game = new Game();
-        System.out.println("Game creation test skipped (requires user input)");
+        // This will prompt for user input
+        Game game = new Game();
+        System.out.println("test done");
     }
 
     public static void main(String[] args) {
         testGameCreation();
-        System.out.println("\nAll tests require manual verification");
-        System.out.println("Run individual test classes to verify components");
+
     }
 }
