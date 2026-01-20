@@ -61,15 +61,6 @@ public class Board {
     }
 
     
-    public int[] letterToRowNumber(String coord) {
-        coord = coord.trim().toUpperCase();
-        String letters = "ABCDEFGH";
-        int row = letters.indexOf(coord.charAt(0));  
-        String numberPart = coord.substring(1);
-        int col = Integer.parseInt(numberPart) - 1;
-    
-        return new int[]{row, col};
-    }
 
     public boolean canFlipUp(int row, int col){
         int count = 0;
